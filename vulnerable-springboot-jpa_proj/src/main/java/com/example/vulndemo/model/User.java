@@ -1,23 +1,39 @@
-
 package com.example.vulndemo.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Long id;
+    private String username;
+    // FIX: Prevent password from being serialized in API responses
+    @JsonIgnore
+    private String password;
 
-    @Column
-    public String username;
+    public Long getId() {
+        return id;
+    }
 
-    @Column
-    public String password;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Column
-    public String email;
+    public String getUsername() {
+        return username;
+    }
 
-    public User() {}
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
